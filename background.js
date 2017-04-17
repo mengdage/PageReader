@@ -4,8 +4,8 @@ var Tips = {
 	httpAddress: "",
 	lmContent: "",
 	loadContent: function(event) {
-		flag=false;
-		out=false;
+		Tips.flag=false;
+		Tips.out=false;
 		Tips.httpAddress = this.href;
 		xmlhttp = new XMLHttpRequest();
 		if (window.XMLHttpRequest) {
@@ -16,10 +16,10 @@ var Tips = {
 		{// code for IE6, IE5
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		}
-		
+
 		xmlhttp.onreadystatechange=function(){
 
-			if (xmlhttp.readyState==4 && xmlhttp.status==200 ){
+			if (!Tips.out && xmlhttp.readyState==4 && xmlhttp.status==200 ){
 				parser=new DOMParser();
 			    doc=xmlhttp.responseText;
 				xmlDoc=parser.parseFromString(doc,"text/html");
@@ -55,9 +55,9 @@ var Tips = {
 				else {
 				Tips.lmContent += "<br><b>Abstract: </b>NULL";
 				}
-				flag=true;
+				Tips.flag=true;
 				Tips.showTips(event);
-				if(out == true) {
+				if(Tips.out) {
 					Tips.closeTips();
 				}
 			}
@@ -79,10 +79,10 @@ var Tips = {
 			x : e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft,
 			y : e.clientY + document.body.scrollTop + document.documentElement.scrollTop
 		};
-	},			
+	},
 
 	showTips : function(event){
-		if(flag) {
+		if(Tips.flag) {
 		event = event || window.event;
 		var target = event.srcElement || event.target;
 		var lmDiv = document.getElementById("lmDiv");
@@ -113,16 +113,17 @@ var Tips = {
 		lmContent.style.margin = "0px"
 
 		//lmContent.innerHTML = this.href;
-		
+
 		lmContent.innerHTML = Tips.lmContent;
 		//lmDiv.innerHTML = target.getAttribute("href");
-		lmDiv.style.display = "";	
-	} 
+		lmDiv.style.display = "";
+	}
 	},
 	closeTips: function() {
 		var lmDiv = document.getElementById("lmDiv");
-		lmDiv.style.display = "none";	
+		lmDiv.style.display = "none";
 		Tips.out = true;
+		console.log(Tips.out);
 
 	}
 }
@@ -135,6 +136,5 @@ for(var i = 0 ;i < links.length ; i ++){
 		//obj.addEventListener("mousemove",Tips.loadContent);
 		obj.addEventListener("mouseout",Tips.closeTips);
 		obj.addEventListener("click",Tips.closeTips);
-		
-}
 
+}
