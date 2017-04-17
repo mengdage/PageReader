@@ -1,0 +1,21 @@
+{
+	"name": "Page Reader",
+	"description": "Improve your reading experience",
+	"version": "1.0",
+	"content_scripts": [
+	{
+		//"matches":["file:///Users/linmeng/Project/*"],
+		"matches":["*://*/*"],
+		"js": ["background.js"]
+	}
+	],
+	"permissions": ["tabs", "http://*/*", "https://*/*"],
+	"browser_action": {
+		"default_title": "Good Reading",
+		"default_icon": "icon_16.png",
+		"default_popup": "popup1.html"
+
+	},
+	"manifest_version":2
+	
+}
