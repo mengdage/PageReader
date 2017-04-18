@@ -1,0 +1,14 @@
+#lmDiv{
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  background-color: #F5F5DC;
+  overflow: scroll;
+  opacity: 0.8;
+}
+
+#lmContent {
+  width: 400px;
+  padding: 0;
+  margin: 0;
+}
